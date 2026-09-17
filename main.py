@@ -100,12 +100,12 @@ async def scoreboard_fragment():
 @rt("/")
 async def get():
     return (
-        Title("Cyber Competition"),
+        Title("OSS Rankings"),
         Main(
             Header(
-                H1("Cyber Competition"),
+                H1("OSS Rankings"),
                 P(
-                    "Combined Scoreboard",
+                    "Official Scoreboard",
                     cls="subtitle",
                 ),
             ),
