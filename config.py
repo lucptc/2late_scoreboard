@@ -1,12 +1,12 @@
 import os
 
 
-CTFD_URL = os.getenv("CTFD_URL", "https://ctf.example.com")
-CTFD_TOKEN = os.getenv("CTFD_TOKEN", "")
+CTFD_URL = os.getenv("CTFD_URL", "http://10.5.8.2")
+CTFD_TOKEN = os.getenv("CTFD_TOKEN", "REDACTED")
 
 SCORING_ENGINE_URL = os.getenv(
     "SCORING_ENGINE_URL",
-    "https://scoring.example.com",
+    "https://10.5.8.43",
 )
 
 

@@ -52,7 +52,7 @@ async def get_scoring_engine_scores():
         "/api/scoreboard/get_bar_data"
     )
 
-    async with httpx.AsyncClient(timeout=5) as client:
+    async with httpx.AsyncClient(timeout=5, verify=False) as client:
         response = await client.get(url)
         response.raise_for_status()
         return response.json()
@@ -86,13 +86,23 @@ def parse_scoring_engine_scores(data):
     # scores["alice"] = 430
     # scores["bob"] = 510
 
-    for entry in data.get("data", []):
-        player = entry.get("name")
+    labels = data.get("labels", [])
+    scores = data.get("adjusted_scores", [])
 
-        if player is not None:
-            scores[player] = int(entry.get("score", 0))
+    if len(labels) != len(scores):
+        raise ValueError(
+            "Scoring Engine returned mismatched labels and scores"
+        )
 
-    return scores
+    result = {}
+    
+    for label, score in zip(labels, scores):
+        if score == "@":
+            score = 0
+
+        result[label] = int(score)
+
+    return result
 
 
 async def get_final_scores():
