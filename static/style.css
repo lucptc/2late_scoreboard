@@ -30,6 +30,9 @@ body {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     max-width: 1100px;
     min-height: 100vh;
     margin: 0 auto;
@@ -107,6 +110,7 @@ h1 {
 .scoreboard {
     width: 100%;
     border-collapse: collapse;
+    margin: 0;
 }
 
 .scoreboard th {
@@ -117,6 +121,10 @@ h1 {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
+}
+
+.scoreboard th:nth-child(n + 3) {
+    text-align: right;
 }
 
 .scoreboard td {
@@ -178,6 +186,7 @@ h1 {
 
 @media (max-width: 650px) {
     main {
+        justify-content: flex-start;
         padding: 30px 12px;
     }
 
@@ -193,5 +202,27 @@ h1 {
     .scoreboard th:nth-child(3),
     .scoreboard td:nth-child(3) {
         display: none;
+    }
+}
+
+@media (min-width: 1400px) {
+    body {
+        zoom: 1.1;
+        min-height: calc(100vh / 1.1);
+    }
+
+    main {
+        min-height: calc(100vh / 1.1);
+    }
+}
+
+@media (min-width: 1800px) {
+    body {
+        zoom: 1.25;
+        min-height: calc(100vh / 1.25);
+    }
+
+    main {
+        min-height: calc(100vh / 1.25);
     }
 }

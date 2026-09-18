@@ -1,5 +1,5 @@
 from fasthtml.common import *
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from config import POLL_SECONDS
 from scoring import get_final_scores
@@ -47,9 +47,12 @@ def score_table(scores):
 async def scoreboard_fragment():
     try:
         scores = await get_final_scores()
+        scores = {}
 
-        now = datetime.now(timezone.utc).strftime(
-            "%H:%M:%S UTC"
+        now = datetime.now(
+            timezone(timedelta(hours=-4))
+        ).strftime(
+            "%H:%M:%S ET"
         )
 
         return Div(
@@ -111,13 +114,6 @@ async def get():
             ),
 
             Div(
-                Div(
-                    Span("CTF", cls="legend-label"),
-                    Span("Blue Team", cls="legend-label"),
-                    Span("Total", cls="legend-label"),
-                    cls="legend",
-                ),
-
                 await scoreboard_fragment(),
                 cls="container",
             ),
